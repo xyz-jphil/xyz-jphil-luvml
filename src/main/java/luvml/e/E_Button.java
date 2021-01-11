@@ -23,7 +23,7 @@ import luvml.HtmlSegment_I;
  */
 public class E_Button extends Element_m {
     public E_Button() {
-        super("button");
+        super("button",false,false,true);
     }
     public static E_Button button(){
         return new E_Button();

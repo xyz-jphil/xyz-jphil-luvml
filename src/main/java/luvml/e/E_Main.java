@@ -23,7 +23,7 @@ import luvml.HtmlSegment_I;
  */
 public class E_Main extends Element_m {
     public E_Main() {
-        super("main");
+        super("main", false, false, true);
     }
     public static E_Main mAin(){
         return new E_Main();
