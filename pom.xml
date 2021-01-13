@@ -93,22 +93,19 @@
                 <artifactId>jsweet-maven-plugin</artifactId>
                 <version>${jsweet.transpiler.version}</version>
                 <configuration>
-                    <verbose>true</verbose>
                     <sourceMap>false</sourceMap> <!-- in J4TS -->
-                    <bundle>true</bundle> <!-- Not there in J4TS, withou this bundle.js might not happen -->
-                    <!-- <tsOut>src/main/resources/src/typings/${project.artifactId}/${project.version}</tsOut> -->
-                    <outDir>target/js</outDir> <!-- As per J4TS : TODO : KEEP, remove this comment -->
-                    <!-- <declaration>true</declaration> --> <!-- not there in the non-candy quickstart, not there in J4TS, TODO : Remove -->
+
+
+<verbose>true</verbose>
+					<bundle>true</bundle>
+					<outDir>src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}</outDir>
+					<dtsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}</dtsOut>
+					<javaCompilerExtraOptions>-source,1.8,-target,1.8</javaCompilerExtraOptions>
+					<encoding>UTF-8</encoding>
+<declaration>true</declaration>
                     <tsserver>true</tsserver>
-                    <!-- <outDir>src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}</outDir> --> <!-- not there in j4ts -->                    
-                    <!-- <tsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}</tsOut> --> <!-- TS out not there -->
-                    <!-- <encoding>UTF-8</encoding>  --> <!-- not there in j4ts : TODO : REMOVE -->
                     <targetVersion>${jstargetVersion}</targetVersion> <!-- set to ES3 in candy examples, ES6 in J4TS, this is ok, TODO : remove comment -->
-                    <!-- <module>none</module>
                     <moduleResolution>classic</moduleResolution> --> <!-- not there in chart.js, not there in J4TS -->
-                    <candiesJsOut>target/candies</candiesJsOut> <!-- There in J4TS, TODO: try removing later -->
-                    <declaration>true</declaration>
-                    <dtsOut>target/ts</dtsOut>
                 </configuration>
                 <executions>
                     <execution>
@@ -127,39 +124,6 @@
                     </execution>
                 </executions>
             </plugin>	
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <echo message="copying js files to artifact's JSweet dir" />	
-                                <delete dir="src/main/resources/META-INF/resources"></delete>
-                                <copy
-                                    file="target/js/bundle.js"
-                                    tofile="src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}/bundle.js"
-                                    verbose="true" />
-                                <copy
-                                    file="target/ts/bundle.d.ts"
-                                    tofile="src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}/bundle.d.ts"
-                                    verbose="true" />
-                                <echo message="copying generated bundles to dist..." />
-                                <copy
-                                        file="target/js/bundle.js"
-                                        tofile="dist/${project.artifactId}.js" verbose="true" />
-                                <copy
-                                        file="target/ts/bundle.d.ts"
-                                        tofile="dist/${project.artifactId}.d.ts" verbose="true" />
-                                </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
