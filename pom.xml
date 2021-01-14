@@ -32,8 +32,6 @@
             <organizationUrl>https://github.com/xyz-jphil</organizationUrl>
         </developer>
     </developers>
-    
-    <!-- JSweet specific start { -->
     <dependencies>
         <dependency>
             <groupId>org.jsweet</groupId>
@@ -85,7 +83,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <!-- <fork>true</fork> --> <!-- not there in the non-candy quickstart, not there is example cited also. TODO : REMOVE -->
                 </configuration>
             </plugin>			
             <plugin>
@@ -93,19 +90,17 @@
                 <artifactId>jsweet-maven-plugin</artifactId>
                 <version>${jsweet.transpiler.version}</version>
                 <configuration>
-                    <sourceMap>false</sourceMap> <!-- in J4TS -->
-
-
-<verbose>true</verbose>
-					<bundle>true</bundle>
-					<outDir>src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}</outDir>
-					<dtsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}</dtsOut>
-					<javaCompilerExtraOptions>-source,1.8,-target,1.8</javaCompilerExtraOptions>
-					<encoding>UTF-8</encoding>
-<declaration>true</declaration>
+                    <sourceMap>false</sourceMap>
+                    <verbose>true</verbose>
+                    <bundle>true</bundle>
+                    <outDir>src/main/resources/META-INF/resources/webjars/${project.artifactId}/${project.version}</outDir>
+                    <dtsOut>src/main/resources/META-INF/resources/typings/${project.artifactId}/${project.version}</dtsOut>
+                    <javaCompilerExtraOptions>-source,1.8,-target,1.8</javaCompilerExtraOptions>
+                    <encoding>UTF-8</encoding>
+                    <declaration>true</declaration>
                     <tsserver>true</tsserver>
-                    <targetVersion>${jstargetVersion}</targetVersion> <!-- set to ES3 in candy examples, ES6 in J4TS, this is ok, TODO : remove comment -->
-                    <moduleResolution>classic</moduleResolution> --> <!-- not there in chart.js, not there in J4TS -->
+                    <targetVersion>${jstargetVersion}</targetVersion>
+                    <moduleResolution>classic</moduleResolution>
                 </configuration>
                 <executions>
                     <execution>
@@ -148,24 +143,14 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.3</version>
                 <configuration>
-                    <!-- <javadocVersion>1.8</javadocVersion> -->
                     <sourcepath>src/main/java</sourcepath>
                     <skip>${skipJavadoc}</skip>
                     <encoding>UTF-8</encoding>
                     <fixTags>all</fixTags>
                     <failOnError>false</failOnError>
                     <source>8</source>
-                    <!-- leave these options unchanged to place the Javadoc at the right place for jsweet.org -->
-                    <!-- Since this is a java candy, not following these, TODO : remove these unncessary lines -->
-                    <!-- <reportOutputDirectory>/var/www/apidocs/releases/org/jsweet/candies</reportOutputDirectory> -->
                     <destDir>${project.artifactId}/${project.version}</destDir>
-                    <!-- end of jsweet.org configuration -->
-                    <!-- <header><![CDATA[<a href="http://www.jsweet.org" target="_blank" style="text-transform: lowercase">http://www.jsweet.org<a>]]></header>
-                    <bottom><![CDATA[<center>Copyright 2015, <a href="http://www.cincheo.org" target="_blank">CinchÃ©o SAS<a> - Web site: <a href="http://www.jsweet.org" target="_blank">http://www.jsweet.org<a><center>]]></bottom>
-                    <stylesheetfile>/var/www/apidocs/stylesheet.css</stylesheetfile> -->
                 </configuration>
-                <!-- Disable javadoc for now -->
-                <!-- -->
                 <executions>
                     <execution>
                         <id>attach-javadoc</id>
@@ -174,12 +159,9 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- -->
             </plugin>
         </plugins>
     </build>
-    <!-- } End of JSweet Specific -->
-    <!-- Maven OSSRH Specifiec -->
     <scm>
         <connection>scm:git:git://github.com/xyz-jphil/${project.artifactId}.git</connection>
         <developerConnection>scm:git:ssh://github.com:xyz-jphil/${project.artifactId}.git</developerConnection>
