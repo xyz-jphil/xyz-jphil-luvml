@@ -4,16 +4,17 @@ import luvx.Frag_I;
 import luvx.Frags_I;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
+import static luvml.A.stringAttribute;
+import static luvml.T.comment;
+import static luvml.T.text;
+import luvx.Attr_I;
+import luvx.Node_I;
 
 /**
  * Concrete implementation of a fragment collection.
  * This class holds a list of fragments that can be rendered together.
- * 
- * Generic version allows type-safe collections like:
- * - Frags<CommentElement> - typed collection of comments
- * - Frags<FootnoteElement> - typed collection of footnotes
- * - Easy retrieval and filtering by type
  * 
  * Usage examples:
  * - Group multiple elements without a wrapper container
@@ -27,20 +28,7 @@ import java.util.stream.Stream;
  */
 public final class Frags<T extends Frag_I<?>> implements Frags_I<Frags<T>> {
 
-    private final List<T> fragments;
-
-    public Frags(Collection<T> fragments) {
-        this.fragments = new ArrayList<>(fragments);
-    }
-    
-    public Frags(Stream<T> fragmentsStream) {
-        this.fragments = fragmentsStream.toList();
-    }
-
-    @SafeVarargs
-    public Frags(T... fragments) {
-        this.fragments = Arrays.asList(fragments);
-    }
+    private final ArrayList<T> fragments = new ArrayList<>();
 
     @Override
     public List<Frag_I> fragments() {
@@ -59,24 +47,39 @@ public final class Frags<T extends Frag_I<?>> implements Frags_I<Frags<T>> {
         return this;
     }
     
-    /**
-     * Creates a mutable copy that allows adding more fragments.
-     */
     @SafeVarargs
     public final Frags<T> add(T... moreFragments) {
-        var newList = new ArrayList<>(this.fragments);
-        Collections.addAll(newList, moreFragments);
-        return new Frags<>(newList);
+        for (var f : moreFragments) {
+            fragments.add(f);
+        }
+        return this;
     }
     
-    /**
-     * Creates a mutable copy that allows adding more fragments.
-     */
-    public Frags<T> add(Collection<T> moreFragments) {
-        var newList = new ArrayList<>(this.fragments);
-        newList.addAll(moreFragments);
-        return new Frags<>(newList);
+    
+    public final Frags<T> add(Iterable<T> moreFragments) {
+        for (var f : moreFragments) {
+            fragments.add(f);
+        }
+        return this;
     }
+    
+    
+    public final Frags<T> add(Stream<T> moreFragments) {
+        moreFragments.forEach((e)->fragments.add(e));
+        
+        return this;
+    }
+    
+    public final Frags<T> add(String ... txtFrags){
+        for (var f : txtFrags) {
+            fragments.add((T)text(f));
+        }
+        return this;
+    }
+    
+    public final Frags<T> ____(String ... frags){return add(frags);}
+    public final Frags<T> ____(Iterable<T> frags){return add(frags);}
+    public final Frags<T> ____(T ... frags){return add(frags);}
     
     
     
@@ -87,7 +90,11 @@ public final class Frags<T extends Frag_I<?>> implements Frags_I<Frags<T>> {
      */
     @SafeVarargs
     public static <T extends Frag_I<?>> Frags<T> of(T... fragments) {
-        return new Frags<>(fragments);
+        return new Frags<T>().add(fragments);
+    }
+    
+    public static <T extends Frag_I<?>> Frags<T> frags() {
+        return new Frags<>();
     }
     
     /**
@@ -95,28 +102,43 @@ public final class Frags<T extends Frag_I<?>> implements Frags_I<Frags<T>> {
      */
     @SafeVarargs
     public static <T extends Frag_I<?>> Frags<T> frags(T... fragments) {
-        return new Frags<>(fragments);
+        return new Frags<T>().add(fragments);
     }
     
-    public static <T extends Frag_I<?>> Frags<T> frags(Stream<T> fragmentsStream){
-        return new Frags<>(fragmentsStream);
-    }
     
-    public static <T extends Frag_I<?>> Frags<T> frags(Collection<T> fragments){
-        return new Frags<>(fragments);
+    public static <T extends Frag_I<?>> Frags<T> frags(Stream<T> fragments){
+        return new Frags().add(fragments);
     }
-    
-    /**
-     * Creates a typed fragment collection from a collection of fragments.
-     */
-    public static <T extends Frag_I<?>> Frags<T> of(Collection<T> fragments) {
-        return new Frags<>(fragments);
+        
+    public static <T extends Frag_I<?>> Frags<T> frags(Iterable<T> fragments){
+        return new Frags().add(fragments);
     }
     
     /**
      * Creates an empty typed fragment collection.
      */
     public static <T extends Frag_I<?>> Frags<T> empty() {
-        return new Frags<>(Collections.emptyList());
+        return new Frags<>();
     }
+    
+    public static Frags_I if_(boolean condition, Supplier<Frag_I> frag){
+        if(condition)return frags(frag.get());
+        return frags();
+    }
+    
+    public static Frags_I optionalAttr(String attrType, Supplier<String> attrValue){
+        String attrVal = null;
+        if(attrValue!=null)
+            attrVal = attrValue.get();
+        if(attrVal==null || attrVal.isBlank()) 
+            return frags(comment((attrType==null?"null":attrType)+"=null")); 
+        // luvml will automatically push this to body of the node
+        if(attrType==null || attrType.isBlank()) {
+            return frags(comment("null="+attrVal )); 
+        }
+            
+        return frags(stringAttribute(attrType,attrVal));
+    }
+    
+    
 }

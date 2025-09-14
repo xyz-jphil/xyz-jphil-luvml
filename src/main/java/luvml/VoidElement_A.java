@@ -20,40 +20,55 @@ abstract class VoidElement_A<T extends VoidElement_A<T>> implements VoidElement_
     }
     
     @Override
-    public String tagName() {
+    public final String tagName() {
         return tagName;
     }
     
     @Override
-    public Map<String, String> attributes() {
+    public final Map<String, String> attributes() {
         return Collections.unmodifiableMap(attributes);
     }
     
     @Override
-    public String attr(String name) {
+    public final String attr(String name) {
         return attributes.get(name);
     }
     
-    public T addAttributes(Attr_I<?>... attrs) {
+    public T ____(Attr_I<?>... attrs){
+        return addAttributes(attrs);
+    }
+    
+    public T ____(Iterable<Attr_I<?>> attrs){
+        return addAttributes(attrs);
+    }
+    
+    public final T addAttributes(Attr_I<?>... attrs) {
         for (var attr : attrs) {
             attributes.put(attr.name(), attr.value());
         }
         return self();
     }
     
-    public Set<ContentCategory> contentCategories() {
+    public final T addAttributes(Iterable<Attr_I<?>> attrs) {
+        for (var attr : attrs) {
+            attributes.put(attr.name(), attr.value());
+        }
+        return self();
+    }
+    
+    public final Set<ContentCategory> contentCategories() {
         return E.getContentCategories(tagName);
     }
     
-    public DisplayType displayType() {
+    public final DisplayType displayType() {
         return E.getDisplayType(tagName);
     }
     
-    public ElementType elementTypeEnum() {
+    public final ElementType elementTypeEnum() {
         return E.getElementType(tagName);
     }
     
-    public Set<Context> contexts() {
+    public final Set<Context> contexts() {
         return E.getValidContexts(tagName);
     }
 }

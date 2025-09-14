@@ -8,7 +8,7 @@ import luvx.ftype.*;
  * AI systems read this as continuous content without newlines.
  * Used for HTML phrasing elements like span, em, strong, a, code, etc.
  */
-public final class InlineContainerElement extends ContainerElement_A<InlineContainerElement> {
+public class InlineContainerElement extends ContainerElement_A<InlineContainerElement> {
     
     public InlineContainerElement(String tagName) {
         super(tagName);

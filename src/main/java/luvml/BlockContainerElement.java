@@ -8,14 +8,14 @@ import luvx.ftype.*;
  * AI systems see clear structural separation for better document comprehension.
  * Used for HTML elements like div, p, section, h1-h6, blockquote, etc.
  */
-public final class BlockContainerElement extends ContainerElement_A<BlockContainerElement> {
+public class BlockContainerElement extends ContainerElement_A<BlockContainerElement> {
     
     public BlockContainerElement(String tagName) {
         super(tagName);
     }
     
     @Override
-    public BlockContainerElement self() {
+    public final BlockContainerElement self() {
         return this;
     }
     

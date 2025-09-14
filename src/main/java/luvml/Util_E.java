@@ -9,11 +9,15 @@ import luvx.Frag_I;
 public class Util_E {
 
     public static BlockVoidElement meta_charset_utf8(Attr_I<?>... attributes) {
-        return meta(charset_utf8()).addAttributes(attributes);
+        return (BlockVoidElement)meta(charset_utf8()).addAttributes(attributes);
     }
 
     public static BlockContainerElement h(int i, Frag_I<?>... fragments) {
         assert i >= 1 && i <= 6;
         return blockContainer("h" + i, fragments);
+    }
+    
+    public static InlineVoidElement lineBreak(){
+        return new InlineVoidElement("");
     }
 }

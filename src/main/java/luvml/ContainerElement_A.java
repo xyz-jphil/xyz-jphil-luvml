@@ -11,7 +11,7 @@ import java.util.*;
  * Provides common implementation for Block and Inline container elements.
  * Subclasses only need to specify their markup rendering behavior.
  */
-abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements ContainerElement_I<T>, HasAttributes<T>, HasChildNodes<T> {
+abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements MutableContainerElement_I<T>, HasAttributes<T>, HasChildNodes<T> {
     
     private final String tagName;
     private final List<Node_I<?>> children = new ArrayList<>();
@@ -22,22 +22,22 @@ abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements Co
     }
     
     @Override
-    public String tagName() {
+    public final String tagName() {
         return tagName;
     }
     
     @Override
-    public List<? extends Node_I<?>> childNodes() {
+    public final List<? extends Node_I<?>> childNodes() {
         return Collections.unmodifiableList(children);
     }
     
     @Override
-    public Map<String, String> attributes() {
+    public final Map<String, String> attributes() {
         return Collections.unmodifiableMap(attributes);
     }
     
     @Override
-    public String attr(String name) {
+    public final String attr(String name) {
         return attributes.get(name);
     }
     
@@ -45,7 +45,7 @@ abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements Co
         return addContent(fragments);
     }
     
-    public T ____(Frag_I<?>... fragments){
+    public T ____(Frag_I<?> ... fragments){
         return addContent(fragments);
     }
     
@@ -53,21 +53,21 @@ abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements Co
         return addContent(fragments);
     }
     
-    public T addContent(Iterable<Frag_I<?>> fragments){
+    public final T addContent(Iterable<Frag_I<?>> fragments){
         for (var fragment : fragments) {
             addFragment(fragment);
         }
         return self();
     }
     
-    public T addContent(Frag_I<?>... fragments) {
+    public final T addContent(Frag_I<?> ... fragments) {
         for (var fragment : fragments) {
             addFragment(fragment);
         }
         return self();
     }
     
-    T addFragment(Frag_I fragment){
+    final T addFragment(Frag_I fragment){
         switch (fragment.fragType()) {
             case Attr_T  a -> attributes.put(a.attr().name(), a.attr().value());
             case Node_T  n -> children.add(n.node());
@@ -76,26 +76,26 @@ abstract class ContainerElement_A<T extends ContainerElement_A<T>> implements Co
         return self();
     }
     
-    public T addContent(String... textContent) {
+    public final T addContent(String... textContent) {
         for (var text : textContent) {
             children.add(new InlineText(text));
         }
         return self();
     }
     
-    public Set<ContentCategory> contentCategories() {
+    public final Set<ContentCategory> contentCategories() {
         return E.getContentCategories(tagName);
     }
     
-    public DisplayType displayType() {
+    public final DisplayType displayType() {
         return E.getDisplayType(tagName);
     }
     
-    public ElementType elementTypeEnum() {
+    public final ElementType elementTypeEnum() {
         return E.getElementType(tagName);
     }
     
-    public Set<Context> contexts() {
+    public final Set<Context> contexts() {
         return E.getValidContexts(tagName);
     }
 }

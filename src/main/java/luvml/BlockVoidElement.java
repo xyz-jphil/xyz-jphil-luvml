@@ -7,14 +7,14 @@ import luvx.*;
  * AI systems see clear structural separation for better document comprehension.
  * Used for HTML void elements like hr, meta, link, base that are block-level.
  */
-public final class BlockVoidElement extends VoidElement_A<BlockVoidElement> {
+public class BlockVoidElement extends VoidElement_A<BlockVoidElement> {
     
     public BlockVoidElement(String tagName) {
         super(tagName);
     }
     
     @Override
-    public BlockVoidElement self() {
+    public final BlockVoidElement self() {
         return this;
     }
     

@@ -10,6 +10,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import luvx.Attr_I;
@@ -512,8 +513,12 @@ public final class E {
     return VALID_CONTEXTS.getOrDefault(elementName, Set.of());
   }
 
+  @SafeVarargs
   public static BlockContainerElement blockContainer(String tagName, Frag_I<?>... fragments) {
-    return new BlockContainerElement(tagName).addContent(fragments);
+    var b = new BlockContainerElement(tagName);
+    
+    b.addContent(fragments);
+    return b;
   }
 
   public static BlockContainerElement blockContainer(String tagName,
@@ -524,12 +529,12 @@ public final class E {
     } else {
       var fragList = new ArrayList<Frag_I<?>>();
       fragments.forEach(fragList::add);
-      return new BlockContainerElement(tagName).addContent(fragList.toArray(new Frag_I<?>[0]));
+      return (BlockContainerElement)new BlockContainerElement(tagName).addContent(fragList.toArray(new Frag_I<?>[0]));
     }
   }
 
   public static BlockContainerElement blockContainer(String tagName, String... textContent) {
-    return new BlockContainerElement(tagName).addContent(textContent);
+    return (BlockContainerElement)new BlockContainerElement(tagName).addContent(textContent);
   }
 
   public static BlockContainerElement blockContainer(String tagName) {
@@ -561,7 +566,7 @@ public final class E {
   }
 
   public static BlockVoidElement blockVoidElement(String tagName, Attr_I<?>... attributes) {
-    return new BlockVoidElement(tagName).addAttributes(attributes);
+    return (BlockVoidElement)new BlockVoidElement(tagName).addAttributes(attributes);
   }
 
   public static BlockVoidElement blockVoidElement(String tagName) {
@@ -569,7 +574,7 @@ public final class E {
   }
 
   public static InlineVoidElement inlineVoidElement(String tagName, Attr_I<?>... attributes) {
-    return new InlineVoidElement(tagName).addAttributes(attributes);
+    return (InlineVoidElement)new InlineVoidElement(tagName).addAttributes(attributes);
   }
 
   public static InlineVoidElement inlineVoidElement(String tagName) {

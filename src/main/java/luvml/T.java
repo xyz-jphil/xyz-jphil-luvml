@@ -74,4 +74,14 @@ public final class T {
     public static BlockCData blockCData(String content) {
         return new BlockCData(content);
     }
+    
+    /**
+     * Special element which doesn't only force a line break
+     * but also forces adding of indentation in the next line
+     * for the renders which support this
+     * @return '\n' + intend x '\t'
+     */
+    public static LineBreak newline(){
+        return LineBreak.NL;
+    }
 }
