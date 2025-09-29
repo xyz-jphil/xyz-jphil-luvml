@@ -28,31 +28,28 @@ public class EnumAttribute implements Attr_I<EnumAttribute> {
     }
     
     public Set<AttributeCategory> categories() {
-        return A.getAttributeCategories(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.categories() : Set.of();
     }
-    
+
     public AttributeType type() {
-        return A.getAttributeType(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.type() : null;
     }
-    
+
     public AttributeScope scope() {
-        return A.getAttributeScope(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.scope() : null;
     }
-    
+
     /**
      * Get allowed enum values for this attribute.
      * Note: For conflicting attributes like "type", this returns the first match.
      * Use ScopedEnumAttribute for scope-specific validation.
      */
     public Set<String> allowedValues() {
-        // Try composite key first (for non-conflicting attributes, this returns null)
-        var scopeSpecific = A.getEnumValues(name + ":" + scope());
-        if (scopeSpecific != null) {
-            return scopeSpecific;
-        }
-        
-        // Fallback to simple name lookup
-        return A.getEnumValues(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.enumValues() : Set.of();
     }
     
     /**

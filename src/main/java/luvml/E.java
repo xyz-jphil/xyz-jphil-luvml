@@ -9,9 +9,6 @@ import java.lang.Iterable;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import luvml.element.BlockContainerElement;
 import luvml.element.BlockVoidElement;
 import luvml.element.InlineContainerElement;
@@ -20,508 +17,12 @@ import luvx.Attr_I;
 import luvx.Frag_I;
 
 public final class E {
-  private static final Map<String, Set<ContentCategory>> CONTENT_CATEGORIES = new HashMap<String, Set<ContentCategory>>() {
-      {
-          put("a", Set.of(PHRASING, FLOW, INTERACTIVE));
-          put("abbr", Set.of(FLOW, PHRASING));
-          put("address", Set.of(FLOW));
-          put("area", Set.of(PHRASING, FLOW, INTERACTIVE));
-          put("article", Set.of(SECTIONING, FLOW));
-          put("aside", Set.of(SECTIONING, FLOW));
-          put("audio", Set.of(EMBEDDED, INTERACTIVE, FLOW, PHRASING));
-          put("b", Set.of(FLOW, PHRASING));
-          put("base", Set.of(METADATA));
-          put("bdi", Set.of(FLOW, PHRASING));
-          put("bdo", Set.of(FLOW, PHRASING));
-          put("blockquote", Set.of(FLOW));
-          put("body", Set.of(SECTIONING));
-          put("br", Set.of(FLOW, PHRASING));
-          put("button", Set.of(INTERACTIVE, FLOW, FORM_ASSOCIATED, PHRASING));
-          put("canvas", Set.of(PHRASING, EMBEDDED, FLOW));
-          put("caption", Set.of());
-          put("cite", Set.of(FLOW, PHRASING));
-          put("code", Set.of(FLOW, PHRASING));
-          put("col", Set.of());
-          put("colgroup", Set.of());
-          put("data", Set.of(FLOW, PHRASING));
-          put("datalist", Set.of(FLOW, PHRASING));
-          put("dd", Set.of());
-          put("del", Set.of(PHRASING, FLOW, TRANSPARENT));
-          put("details", Set.of(INTERACTIVE, FLOW));
-          put("dfn", Set.of(FLOW, PHRASING));
-          put("dialog", Set.of(FLOW));
-          put("div", Set.of(FLOW));
-          put("dl", Set.of(FLOW));
-          put("dt", Set.of());
-          put("em", Set.of(FLOW, PHRASING));
-          put("embed", Set.of(EMBEDDED, INTERACTIVE, FLOW, PHRASING));
-          put("fieldset", Set.of(FORM_ASSOCIATED, FLOW));
-          put("figcaption", Set.of());
-          put("figure", Set.of(FLOW));
-          put("footer", Set.of(FLOW));
-          put("form", Set.of(FLOW));
-          put("h1", Set.of(HEADING, FLOW));
-          put("h2", Set.of(HEADING, FLOW));
-          put("h3", Set.of(HEADING, FLOW));
-          put("h4", Set.of(HEADING, FLOW));
-          put("h5", Set.of(HEADING, FLOW));
-          put("h6", Set.of(HEADING, FLOW));
-          put("head", Set.of());
-          put("header", Set.of(FLOW));
-          put("hgroup", Set.of(HEADING, FLOW));
-          put("hr", Set.of(FLOW));
-          put("html", Set.of());
-          put("i", Set.of(FLOW, PHRASING));
-          put("iframe", Set.of(EMBEDDED, INTERACTIVE, FLOW, PHRASING));
-          put("img", Set.of(INTERACTIVE, FORM_ASSOCIATED, PHRASING, FLOW, EMBEDDED));
-          put("input", Set.of(INTERACTIVE, FLOW, FORM_ASSOCIATED, PHRASING));
-          put("ins", Set.of(PHRASING, FLOW, TRANSPARENT));
-          put("kbd", Set.of(FLOW, PHRASING));
-          put("label", Set.of(INTERACTIVE, FLOW, FORM_ASSOCIATED, PHRASING));
-          put("legend", Set.of());
-          put("li", Set.of());
-          put("link", Set.of(PHRASING, FLOW, METADATA));
-          put("main", Set.of(FLOW));
-          put("map", Set.of(PHRASING, FLOW, TRANSPARENT));
-          put("mark", Set.of(FLOW, PHRASING));
-          put("math", Set.of(PHRASING, EMBEDDED, FLOW));
-          put("menu", Set.of(FLOW));
-          put("meta", Set.of(METADATA));
-          put("meter", Set.of(FLOW, PHRASING));
-          put("nav", Set.of(SECTIONING, FLOW));
-          put("noscript", Set.of(PHRASING, FLOW, METADATA));
-          put("object", Set.of(INTERACTIVE, FORM_ASSOCIATED, PHRASING, FLOW, EMBEDDED));
-          put("ol", Set.of(FLOW));
-          put("optgroup", Set.of());
-          put("option", Set.of());
-          put("output", Set.of(PHRASING, FORM_ASSOCIATED, FLOW));
-          put("p", Set.of(FLOW));
-          put("picture", Set.of(PHRASING, EMBEDDED, FLOW));
-          put("pre", Set.of(FLOW));
-          put("progress", Set.of(FLOW, PHRASING));
-          put("q", Set.of(FLOW, PHRASING));
-          put("rp", Set.of());
-          put("rt", Set.of());
-          put("ruby", Set.of(FLOW, PHRASING));
-          put("s", Set.of(FLOW, PHRASING));
-          put("samp", Set.of(FLOW, PHRASING));
-          put("script", Set.of(SCRIPT_SUPPORTING, FLOW, METADATA, PHRASING));
-          put("search", Set.of(FLOW));
-          put("section", Set.of(SECTIONING, FLOW));
-          put("select", Set.of(INTERACTIVE, FLOW, FORM_ASSOCIATED, PHRASING));
-          put("slot", Set.of(PHRASING, FLOW, TRANSPARENT));
-          put("small", Set.of(FLOW, PHRASING));
-          put("source", Set.of());
-          put("span", Set.of(FLOW, PHRASING));
-          put("strong", Set.of(FLOW, PHRASING));
-          put("style", Set.of(METADATA));
-          put("sub", Set.of(FLOW, PHRASING));
-          put("summary", Set.of());
-          put("sup", Set.of(FLOW, PHRASING));
-          put("svg", Set.of(PHRASING, EMBEDDED, FLOW));
-          put("table", Set.of(FLOW));
-          put("tbody", Set.of());
-          put("td", Set.of());
-          put("template", Set.of(SCRIPT_SUPPORTING, FLOW, METADATA, PHRASING));
-          put("textarea", Set.of(INTERACTIVE, FLOW, FORM_ASSOCIATED, PHRASING));
-          put("tfoot", Set.of());
-          put("th", Set.of());
-          put("thead", Set.of());
-          put("time", Set.of(FLOW, PHRASING));
-          put("title", Set.of(METADATA));
-          put("tr", Set.of());
-          put("track", Set.of());
-          put("u", Set.of(FLOW, PHRASING));
-          put("ul", Set.of(FLOW));
-          put("var", Set.of(FLOW, PHRASING));
-          put("video", Set.of(EMBEDDED, INTERACTIVE, FLOW, PHRASING));
-          put("wbr", Set.of(FLOW, PHRASING));
-      }
-  };
-
-  private static final Map<String, DisplayType> DISPLAY_TYPES = new HashMap<String, DisplayType>() {
-      {
-          put("a", INLINE);
-          put("abbr", INLINE);
-          put("address", BLOCK);
-          put("area", NONE);
-          put("article", BLOCK);
-          put("aside", BLOCK);
-          put("audio", INLINE_BLOCK);
-          put("b", INLINE);
-          put("base", NONE);
-          put("bdi", INLINE);
-          put("bdo", INLINE);
-          put("blockquote", BLOCK);
-          put("body", BLOCK);
-          put("br", INLINE);
-          put("button", INLINE_BLOCK);
-          put("canvas", INLINE_BLOCK);
-          put("caption", TABLE);
-          put("cite", INLINE);
-          put("code", INLINE);
-          put("col", TABLE);
-          put("colgroup", TABLE);
-          put("data", INLINE);
-          put("datalist", NONE);
-          put("dd", BLOCK);
-          put("del", INLINE);
-          put("details", BLOCK);
-          put("dfn", INLINE);
-          put("dialog", BLOCK);
-          put("div", BLOCK);
-          put("dl", BLOCK);
-          put("dt", BLOCK);
-          put("em", INLINE);
-          put("embed", INLINE_BLOCK);
-          put("fieldset", BLOCK);
-          put("figcaption", BLOCK);
-          put("figure", BLOCK);
-          put("footer", BLOCK);
-          put("form", BLOCK);
-          put("h1", BLOCK);
-          put("h2", BLOCK);
-          put("h3", BLOCK);
-          put("h4", BLOCK);
-          put("h5", BLOCK);
-          put("h6", BLOCK);
-          put("head", NONE);
-          put("header", BLOCK);
-          put("hgroup", BLOCK);
-          put("hr", BLOCK);
-          put("html", BLOCK);
-          put("i", INLINE);
-          put("iframe", INLINE_BLOCK);
-          put("img", INLINE_BLOCK);
-          put("input", INLINE_BLOCK);
-          put("ins", INLINE);
-          put("kbd", INLINE);
-          put("label", INLINE);
-          put("legend", BLOCK);
-          put("li", BLOCK);
-          put("link", NONE);
-          put("main", BLOCK);
-          put("map", INLINE);
-          put("mark", INLINE);
-          put("math", INLINE_BLOCK);
-          put("menu", BLOCK);
-          put("meta", NONE);
-          put("meter", INLINE);
-          put("nav", BLOCK);
-          put("noscript", INLINE);
-          put("object", INLINE_BLOCK);
-          put("ol", BLOCK);
-          put("optgroup", NONE);
-          put("option", NONE);
-          put("output", INLINE);
-          put("p", BLOCK);
-          put("picture", INLINE_BLOCK);
-          put("pre", BLOCK);
-          put("progress", INLINE);
-          put("q", INLINE);
-          put("rp", INLINE);
-          put("rt", INLINE);
-          put("ruby", INLINE);
-          put("s", INLINE);
-          put("samp", INLINE);
-          put("script", NONE);
-          put("search", BLOCK);
-          put("section", BLOCK);
-          put("select", INLINE_BLOCK);
-          put("slot", INLINE);
-          put("small", INLINE);
-          put("source", NONE);
-          put("span", INLINE);
-          put("strong", INLINE);
-          put("style", NONE);
-          put("sub", INLINE);
-          put("summary", BLOCK);
-          put("sup", INLINE);
-          put("svg", INLINE_BLOCK);
-          put("table", TABLE);
-          put("tbody", TABLE);
-          put("td", TABLE);
-          put("template", NONE);
-          put("textarea", INLINE_BLOCK);
-          put("tfoot", TABLE);
-          put("th", TABLE);
-          put("thead", TABLE);
-          put("time", INLINE);
-          put("title", NONE);
-          put("tr", TABLE);
-          put("track", NONE);
-          put("u", INLINE);
-          put("ul", BLOCK);
-          put("var", INLINE);
-          put("video", INLINE_BLOCK);
-          put("wbr", INLINE);
-      }
-  };
-
-  private static final Map<String, ElementType> ELEMENT_TYPES = new HashMap<String, ElementType>() {
-      {
-          put("a", CONTAINER);
-          put("abbr", CONTAINER);
-          put("address", CONTAINER);
-          put("area", VOID);
-          put("article", CONTAINER);
-          put("aside", CONTAINER);
-          put("audio", CONTAINER);
-          put("b", CONTAINER);
-          put("base", VOID);
-          put("bdi", CONTAINER);
-          put("bdo", CONTAINER);
-          put("blockquote", CONTAINER);
-          put("body", CONTAINER);
-          put("br", VOID);
-          put("button", CONTAINER);
-          put("canvas", CONTAINER);
-          put("caption", CONTAINER);
-          put("cite", CONTAINER);
-          put("code", CONTAINER);
-          put("col", VOID);
-          put("colgroup", CONTAINER);
-          put("data", CONTAINER);
-          put("datalist", CONTAINER);
-          put("dd", CONTAINER);
-          put("del", CONTAINER);
-          put("details", CONTAINER);
-          put("dfn", CONTAINER);
-          put("dialog", CONTAINER);
-          put("div", CONTAINER);
-          put("dl", CONTAINER);
-          put("dt", CONTAINER);
-          put("em", CONTAINER);
-          put("embed", VOID);
-          put("fieldset", CONTAINER);
-          put("figcaption", CONTAINER);
-          put("figure", CONTAINER);
-          put("footer", CONTAINER);
-          put("form", CONTAINER);
-          put("h1", CONTAINER);
-          put("h2", CONTAINER);
-          put("h3", CONTAINER);
-          put("h4", CONTAINER);
-          put("h5", CONTAINER);
-          put("h6", CONTAINER);
-          put("head", CONTAINER);
-          put("header", CONTAINER);
-          put("hgroup", CONTAINER);
-          put("hr", VOID);
-          put("html", CONTAINER);
-          put("i", CONTAINER);
-          put("iframe", CONTAINER);
-          put("img", VOID);
-          put("input", VOID);
-          put("ins", CONTAINER);
-          put("kbd", CONTAINER);
-          put("label", CONTAINER);
-          put("legend", CONTAINER);
-          put("li", CONTAINER);
-          put("link", VOID);
-          put("main", CONTAINER);
-          put("map", CONTAINER);
-          put("mark", CONTAINER);
-          put("math", CONTAINER);
-          put("menu", CONTAINER);
-          put("meta", VOID);
-          put("meter", CONTAINER);
-          put("nav", CONTAINER);
-          put("noscript", CONTAINER);
-          put("object", CONTAINER);
-          put("ol", CONTAINER);
-          put("optgroup", CONTAINER);
-          put("option", CONTAINER);
-          put("output", CONTAINER);
-          put("p", CONTAINER);
-          put("picture", CONTAINER);
-          put("pre", CONTAINER);
-          put("progress", CONTAINER);
-          put("q", CONTAINER);
-          put("rp", CONTAINER);
-          put("rt", CONTAINER);
-          put("ruby", CONTAINER);
-          put("s", CONTAINER);
-          put("samp", CONTAINER);
-          put("script", RAW_TEXT);
-          put("search", CONTAINER);
-          put("section", CONTAINER);
-          put("select", CONTAINER);
-          put("slot", CONTAINER);
-          put("small", CONTAINER);
-          put("source", VOID);
-          put("span", CONTAINER);
-          put("strong", CONTAINER);
-          put("style", RAW_TEXT);
-          put("sub", CONTAINER);
-          put("summary", CONTAINER);
-          put("sup", CONTAINER);
-          put("svg", CONTAINER);
-          put("table", CONTAINER);
-          put("tbody", CONTAINER);
-          put("td", CONTAINER);
-          put("template", CONTAINER);
-          put("textarea", ESCAPABLE_RAW_TEXT);
-          put("tfoot", CONTAINER);
-          put("th", CONTAINER);
-          put("thead", CONTAINER);
-          put("time", CONTAINER);
-          put("title", ESCAPABLE_RAW_TEXT);
-          put("tr", CONTAINER);
-          put("track", VOID);
-          put("u", CONTAINER);
-          put("ul", CONTAINER);
-          put("var", CONTAINER);
-          put("video", CONTAINER);
-          put("wbr", VOID);
-      }
-  };
-
-  private static final Map<String, Set<Context>> VALID_CONTEXTS = new HashMap<String, Set<Context>>() {
-      {
-          put("a", Set.of(PHRASING_CTX));
-          put("abbr", Set.of(PHRASING_CTX));
-          put("address", Set.of(FLOW_CTX));
-          put("area", Set.of(MAP_CTX));
-          put("article", Set.of(FLOW_CTX));
-          put("aside", Set.of(FLOW_CTX));
-          put("audio", Set.of(PHRASING_CTX));
-          put("b", Set.of(PHRASING_CTX));
-          put("base", Set.of(HEAD_CTX));
-          put("bdi", Set.of(PHRASING_CTX));
-          put("bdo", Set.of(PHRASING_CTX));
-          put("blockquote", Set.of(FLOW_CTX));
-          put("body", Set.of(HTML_CTX));
-          put("br", Set.of(PHRASING_CTX));
-          put("button", Set.of(PHRASING_CTX));
-          put("canvas", Set.of(PHRASING_CTX));
-          put("caption", Set.of(TABLE_CTX));
-          put("cite", Set.of(PHRASING_CTX));
-          put("code", Set.of(PHRASING_CTX));
-          put("col", Set.of(COLGROUP_CTX));
-          put("colgroup", Set.of(TABLE_CTX));
-          put("data", Set.of(PHRASING_CTX));
-          put("datalist", Set.of(PHRASING_CTX));
-          put("dd", Set.of(DL_CTX));
-          put("del", Set.of(FLOW_CTX, PHRASING_CTX));
-          put("details", Set.of(FLOW_CTX));
-          put("dfn", Set.of(PHRASING_CTX));
-          put("dialog", Set.of(FLOW_CTX));
-          put("div", Set.of(FLOW_CTX));
-          put("dl", Set.of(FLOW_CTX));
-          put("dt", Set.of(DL_CTX));
-          put("em", Set.of(PHRASING_CTX));
-          put("embed", Set.of(PHRASING_CTX));
-          put("fieldset", Set.of(FLOW_CTX));
-          put("figcaption", Set.of(FIGURE_CTX));
-          put("figure", Set.of(FLOW_CTX));
-          put("footer", Set.of(FLOW_CTX));
-          put("form", Set.of(FLOW_CTX));
-          put("h1", Set.of(FLOW_CTX));
-          put("h2", Set.of(FLOW_CTX));
-          put("h3", Set.of(FLOW_CTX));
-          put("h4", Set.of(FLOW_CTX));
-          put("h5", Set.of(FLOW_CTX));
-          put("h6", Set.of(FLOW_CTX));
-          put("head", Set.of(HTML_CTX));
-          put("header", Set.of(FLOW_CTX));
-          put("hgroup", Set.of(FLOW_CTX));
-          put("hr", Set.of(FLOW_CTX));
-          put("html", Set.of(ROOT_CTX));
-          put("i", Set.of(PHRASING_CTX));
-          put("iframe", Set.of(PHRASING_CTX));
-          put("img", Set.of(PHRASING_CTX));
-          put("input", Set.of(PHRASING_CTX));
-          put("ins", Set.of(FLOW_CTX, PHRASING_CTX));
-          put("kbd", Set.of(PHRASING_CTX));
-          put("label", Set.of(PHRASING_CTX));
-          put("legend", Set.of(FIELDSET_CTX));
-          put("li", Set.of(OL_CTX, UL_CTX));
-          put("link", Set.of(PHRASING_CTX, HEAD_CTX));
-          put("main", Set.of(FLOW_CTX));
-          put("map", Set.of(PHRASING_CTX));
-          put("mark", Set.of(PHRASING_CTX));
-          put("math", Set.of(PHRASING_CTX));
-          put("menu", Set.of(FLOW_CTX));
-          put("meta", Set.of(HEAD_CTX));
-          put("meter", Set.of(PHRASING_CTX));
-          put("nav", Set.of(FLOW_CTX));
-          put("noscript", Set.of(PHRASING_CTX, HEAD_CTX));
-          put("object", Set.of(PHRASING_CTX));
-          put("ol", Set.of(FLOW_CTX));
-          put("optgroup", Set.of(SELECT_CTX));
-          put("option", Set.of(DATALIST_CTX, SELECT_CTX));
-          put("output", Set.of(PHRASING_CTX));
-          put("p", Set.of(FLOW_CTX));
-          put("picture", Set.of(PHRASING_CTX));
-          put("pre", Set.of(FLOW_CTX));
-          put("progress", Set.of(PHRASING_CTX));
-          put("q", Set.of(PHRASING_CTX));
-          put("rp", Set.of(RUBY_CTX));
-          put("rt", Set.of(RUBY_CTX));
-          put("ruby", Set.of(PHRASING_CTX));
-          put("s", Set.of(PHRASING_CTX));
-          put("samp", Set.of(PHRASING_CTX));
-          put("script", Set.of(PHRASING_CTX, HEAD_CTX));
-          put("search", Set.of(FLOW_CTX));
-          put("section", Set.of(FLOW_CTX));
-          put("select", Set.of(PHRASING_CTX));
-          put("slot", Set.of(PHRASING_CTX));
-          put("small", Set.of(PHRASING_CTX));
-          put("source", Set.of(VIDEO_CTX, PICTURE_CTX, AUDIO_CTX));
-          put("span", Set.of(PHRASING_CTX));
-          put("strong", Set.of(PHRASING_CTX));
-          put("style", Set.of(HEAD_CTX));
-          put("sub", Set.of(PHRASING_CTX));
-          put("summary", Set.of(DETAILS_CTX));
-          put("sup", Set.of(PHRASING_CTX));
-          put("svg", Set.of(PHRASING_CTX));
-          put("table", Set.of(FLOW_CTX));
-          put("tbody", Set.of(TABLE_CTX));
-          put("td", Set.of(TR_CTX));
-          put("template", Set.of(PHRASING_CTX, HEAD_CTX));
-          put("textarea", Set.of(PHRASING_CTX));
-          put("tfoot", Set.of(TABLE_CTX));
-          put("th", Set.of(TR_CTX));
-          put("thead", Set.of(TABLE_CTX));
-          put("time", Set.of(PHRASING_CTX));
-          put("title", Set.of(HEAD_CTX));
-          put("tr", Set.of(TABLE_CTX));
-          put("track", Set.of(VIDEO_CTX, AUDIO_CTX));
-          put("u", Set.of(PHRASING_CTX));
-          put("ul", Set.of(FLOW_CTX));
-          put("var", Set.of(PHRASING_CTX));
-          put("video", Set.of(PHRASING_CTX));
-          put("wbr", Set.of(PHRASING_CTX));
-      }
-  };
-
   private E() {
     // Utility class;
   }
 
-  public static Set<ContentCategory> getContentCategories(String elementName) {
-    return CONTENT_CATEGORIES.getOrDefault(elementName, Set.of());
-  }
-
-  public static DisplayType getDisplayType(String elementName) {
-    return DISPLAY_TYPES.get(elementName);
-  }
-
-  public static ElementType getElementType(String elementName) {
-    return ELEMENT_TYPES.get(elementName);
-  }
-
-  public static Set<Context> getValidContexts(String elementName) {
-    return VALID_CONTEXTS.getOrDefault(elementName, Set.of());
-  }
-
-  @SafeVarargs
   public static BlockContainerElement blockContainer(String tagName, Frag_I<?>... fragments) {
-    var b = new BlockContainerElement(tagName);
-    
-    b.addContent(fragments);
-    return b;
+    return new BlockContainerElement(tagName).addContent(fragments);
   }
 
   public static BlockContainerElement blockContainer(String tagName,
@@ -532,12 +33,12 @@ public final class E {
     } else {
       var fragList = new ArrayList<Frag_I<?>>();
       fragments.forEach(fragList::add);
-      return (BlockContainerElement)new BlockContainerElement(tagName).addContent(fragList.toArray(new Frag_I<?>[0]));
+      return new BlockContainerElement(tagName).addContent(fragList.toArray(new Frag_I<?>[0]));
     }
   }
 
   public static BlockContainerElement blockContainer(String tagName, String... textContent) {
-    return (BlockContainerElement)new BlockContainerElement(tagName).addContent(textContent);
+    return new BlockContainerElement(tagName).addContent(textContent);
   }
 
   public static BlockContainerElement blockContainer(String tagName) {
@@ -569,7 +70,7 @@ public final class E {
   }
 
   public static BlockVoidElement blockVoidElement(String tagName, Attr_I<?>... attributes) {
-    return (BlockVoidElement)new BlockVoidElement(tagName).addAttributes(attributes);
+    return new BlockVoidElement(tagName).addAttributes(attributes);
   }
 
   public static BlockVoidElement blockVoidElement(String tagName) {
@@ -577,7 +78,7 @@ public final class E {
   }
 
   public static InlineVoidElement inlineVoidElement(String tagName, Attr_I<?>... attributes) {
-    return (InlineVoidElement)new InlineVoidElement(tagName).addAttributes(attributes);
+    return new InlineVoidElement(tagName).addAttributes(attributes);
   }
 
   public static InlineVoidElement inlineVoidElement(String tagName) {
@@ -672,20 +173,20 @@ public final class E {
     return blockContainer("aside");
   }
 
-  public static BlockContainerElement audio(Frag_I<?>... fragments) {
-    return blockContainer("audio", fragments);
+  public static InlineContainerElement audio(Frag_I<?>... fragments) {
+    return inlineContainer("audio", fragments);
   }
 
-  public static BlockContainerElement audio(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("audio", fragments);
+  public static InlineContainerElement audio(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("audio", fragments);
   }
 
-  public static BlockContainerElement audio(String... textContent) {
-    return blockContainer("audio", textContent);
+  public static InlineContainerElement audio(String... textContent) {
+    return inlineContainer("audio", textContent);
   }
 
-  public static BlockContainerElement audio() {
-    return blockContainer("audio");
+  public static InlineContainerElement audio() {
+    return inlineContainer("audio");
   }
 
   public static InlineContainerElement b(Frag_I<?>... fragments) {
@@ -800,20 +301,20 @@ public final class E {
     return inlineContainer("button");
   }
 
-  public static BlockContainerElement canvas(Frag_I<?>... fragments) {
-    return blockContainer("canvas", fragments);
+  public static InlineContainerElement canvas(Frag_I<?>... fragments) {
+    return inlineContainer("canvas", fragments);
   }
 
-  public static BlockContainerElement canvas(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("canvas", fragments);
+  public static InlineContainerElement canvas(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("canvas", fragments);
   }
 
-  public static BlockContainerElement canvas(String... textContent) {
-    return blockContainer("canvas", textContent);
+  public static InlineContainerElement canvas(String... textContent) {
+    return inlineContainer("canvas", textContent);
   }
 
-  public static BlockContainerElement canvas() {
-    return blockContainer("canvas");
+  public static InlineContainerElement canvas() {
+    return inlineContainer("canvas");
   }
 
   public static BlockContainerElement caption(Frag_I<?>... fragments) {
@@ -864,12 +365,12 @@ public final class E {
     return inlineContainer("code");
   }
 
-  public static InlineVoidElement col(Attr_I<?>... attributes) {
-    return inlineVoidElement("col", attributes);
+  public static BlockVoidElement col(Attr_I<?>... attributes) {
+    return blockVoidElement("col", attributes);
   }
 
-  public static InlineVoidElement col() {
-    return inlineVoidElement("col");
+  public static BlockVoidElement col() {
+    return blockVoidElement("col");
   }
 
   public static BlockContainerElement colgroup(Frag_I<?>... fragments) {
@@ -904,20 +405,20 @@ public final class E {
     return inlineContainer("data");
   }
 
-  public static BlockContainerElement datalist(Frag_I<?>... fragments) {
-    return blockContainer("datalist", fragments);
+  public static InlineContainerElement datalist(Frag_I<?>... fragments) {
+    return inlineContainer("datalist", fragments);
   }
 
-  public static BlockContainerElement datalist(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("datalist", fragments);
+  public static InlineContainerElement datalist(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("datalist", fragments);
   }
 
-  public static BlockContainerElement datalist(String... textContent) {
-    return blockContainer("datalist", textContent);
+  public static InlineContainerElement datalist(String... textContent) {
+    return inlineContainer("datalist", textContent);
   }
 
-  public static BlockContainerElement datalist() {
-    return blockContainer("datalist");
+  public static InlineContainerElement datalist() {
+    return inlineContainer("datalist");
   }
 
   public static BlockContainerElement dd(Frag_I<?>... fragments) {
@@ -1336,20 +837,20 @@ public final class E {
     return inlineContainer("i");
   }
 
-  public static BlockContainerElement iframe(Frag_I<?>... fragments) {
-    return blockContainer("iframe", fragments);
+  public static InlineContainerElement iframe(Frag_I<?>... fragments) {
+    return inlineContainer("iframe", fragments);
   }
 
-  public static BlockContainerElement iframe(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("iframe", fragments);
+  public static InlineContainerElement iframe(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("iframe", fragments);
   }
 
-  public static BlockContainerElement iframe(String... textContent) {
-    return blockContainer("iframe", textContent);
+  public static InlineContainerElement iframe(String... textContent) {
+    return inlineContainer("iframe", textContent);
   }
 
-  public static BlockContainerElement iframe() {
-    return blockContainer("iframe");
+  public static InlineContainerElement iframe() {
+    return inlineContainer("iframe");
   }
 
   public static InlineVoidElement img(Attr_I<?>... attributes) {
@@ -1448,12 +949,12 @@ public final class E {
     return blockContainer("li");
   }
 
-  public static BlockVoidElement link(Attr_I<?>... attributes) {
-    return blockVoidElement("link", attributes);
+  public static InlineVoidElement link(Attr_I<?>... attributes) {
+    return inlineVoidElement("link", attributes);
   }
 
-  public static BlockVoidElement link() {
-    return blockVoidElement("link");
+  public static InlineVoidElement link() {
+    return inlineVoidElement("link");
   }
 
   public static BlockContainerElement main(Frag_I<?>... fragments) {
@@ -1472,20 +973,20 @@ public final class E {
     return blockContainer("main");
   }
 
-  public static BlockContainerElement map(Frag_I<?>... fragments) {
-    return blockContainer("map", fragments);
+  public static InlineContainerElement map(Frag_I<?>... fragments) {
+    return inlineContainer("map", fragments);
   }
 
-  public static BlockContainerElement map(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("map", fragments);
+  public static InlineContainerElement map(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("map", fragments);
   }
 
-  public static BlockContainerElement map(String... textContent) {
-    return blockContainer("map", textContent);
+  public static InlineContainerElement map(String... textContent) {
+    return inlineContainer("map", textContent);
   }
 
-  public static BlockContainerElement map() {
-    return blockContainer("map");
+  public static InlineContainerElement map() {
+    return inlineContainer("map");
   }
 
   public static InlineContainerElement mark(Frag_I<?>... fragments) {
@@ -1504,20 +1005,20 @@ public final class E {
     return inlineContainer("mark");
   }
 
-  public static BlockContainerElement math(Frag_I<?>... fragments) {
-    return blockContainer("math", fragments);
+  public static InlineContainerElement math(Frag_I<?>... fragments) {
+    return inlineContainer("math", fragments);
   }
 
-  public static BlockContainerElement math(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("math", fragments);
+  public static InlineContainerElement math(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("math", fragments);
   }
 
-  public static BlockContainerElement math(String... textContent) {
-    return blockContainer("math", textContent);
+  public static InlineContainerElement math(String... textContent) {
+    return inlineContainer("math", textContent);
   }
 
-  public static BlockContainerElement math() {
-    return blockContainer("math");
+  public static InlineContainerElement math() {
+    return inlineContainer("math");
   }
 
   public static BlockContainerElement menu(Frag_I<?>... fragments) {
@@ -1592,20 +1093,20 @@ public final class E {
     return inlineContainer("noscript");
   }
 
-  public static BlockContainerElement object(Frag_I<?>... fragments) {
-    return blockContainer("object", fragments);
+  public static InlineContainerElement object(Frag_I<?>... fragments) {
+    return inlineContainer("object", fragments);
   }
 
-  public static BlockContainerElement object(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("object", fragments);
+  public static InlineContainerElement object(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("object", fragments);
   }
 
-  public static BlockContainerElement object(String... textContent) {
-    return blockContainer("object", textContent);
+  public static InlineContainerElement object(String... textContent) {
+    return inlineContainer("object", textContent);
   }
 
-  public static BlockContainerElement object() {
-    return blockContainer("object");
+  public static InlineContainerElement object() {
+    return inlineContainer("object");
   }
 
   public static BlockContainerElement ol(Frag_I<?>... fragments) {
@@ -1688,20 +1189,20 @@ public final class E {
     return blockContainer("p");
   }
 
-  public static BlockContainerElement picture(Frag_I<?>... fragments) {
-    return blockContainer("picture", fragments);
+  public static InlineContainerElement picture(Frag_I<?>... fragments) {
+    return inlineContainer("picture", fragments);
   }
 
-  public static BlockContainerElement picture(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("picture", fragments);
+  public static InlineContainerElement picture(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("picture", fragments);
   }
 
-  public static BlockContainerElement picture(String... textContent) {
-    return blockContainer("picture", textContent);
+  public static InlineContainerElement picture(String... textContent) {
+    return inlineContainer("picture", textContent);
   }
 
-  public static BlockContainerElement picture() {
-    return blockContainer("picture");
+  public static InlineContainerElement picture() {
+    return inlineContainer("picture");
   }
 
   public static BlockContainerElement pre(Frag_I<?>... fragments) {
@@ -1832,20 +1333,20 @@ public final class E {
     return inlineContainer("samp");
   }
 
-  public static BlockContainerElement script(Frag_I<?>... fragments) {
-    return blockContainer("script", fragments);
+  public static InlineContainerElement script(Frag_I<?>... fragments) {
+    return inlineContainer("script", fragments);
   }
 
-  public static BlockContainerElement script(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("script", fragments);
+  public static InlineContainerElement script(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("script", fragments);
   }
 
-  public static BlockContainerElement script(String... textContent) {
-    return blockContainer("script", textContent);
+  public static InlineContainerElement script(String... textContent) {
+    return inlineContainer("script", textContent);
   }
 
-  public static BlockContainerElement script() {
-    return blockContainer("script");
+  public static InlineContainerElement script() {
+    return inlineContainer("script");
   }
 
   public static BlockContainerElement search(Frag_I<?>... fragments) {
@@ -1880,36 +1381,36 @@ public final class E {
     return blockContainer("section");
   }
 
-  public static BlockContainerElement select(Frag_I<?>... fragments) {
-    return blockContainer("select", fragments);
+  public static InlineContainerElement select(Frag_I<?>... fragments) {
+    return inlineContainer("select", fragments);
   }
 
-  public static BlockContainerElement select(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("select", fragments);
+  public static InlineContainerElement select(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("select", fragments);
   }
 
-  public static BlockContainerElement select(String... textContent) {
-    return blockContainer("select", textContent);
+  public static InlineContainerElement select(String... textContent) {
+    return inlineContainer("select", textContent);
   }
 
-  public static BlockContainerElement select() {
-    return blockContainer("select");
+  public static InlineContainerElement select() {
+    return inlineContainer("select");
   }
 
-  public static BlockContainerElement slot(Frag_I<?>... fragments) {
-    return blockContainer("slot", fragments);
+  public static InlineContainerElement slot(Frag_I<?>... fragments) {
+    return inlineContainer("slot", fragments);
   }
 
-  public static BlockContainerElement slot(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("slot", fragments);
+  public static InlineContainerElement slot(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("slot", fragments);
   }
 
-  public static BlockContainerElement slot(String... textContent) {
-    return blockContainer("slot", textContent);
+  public static InlineContainerElement slot(String... textContent) {
+    return inlineContainer("slot", textContent);
   }
 
-  public static BlockContainerElement slot() {
-    return blockContainer("slot");
+  public static InlineContainerElement slot() {
+    return inlineContainer("slot");
   }
 
   public static InlineContainerElement small(Frag_I<?>... fragments) {
@@ -1928,12 +1429,12 @@ public final class E {
     return inlineContainer("small");
   }
 
-  public static InlineVoidElement source(Attr_I<?>... attributes) {
-    return inlineVoidElement("source", attributes);
+  public static BlockVoidElement source(Attr_I<?>... attributes) {
+    return blockVoidElement("source", attributes);
   }
 
-  public static InlineVoidElement source() {
-    return inlineVoidElement("source");
+  public static BlockVoidElement source() {
+    return blockVoidElement("source");
   }
 
   public static InlineContainerElement span(Frag_I<?>... fragments) {
@@ -2032,20 +1533,20 @@ public final class E {
     return inlineContainer("sup");
   }
 
-  public static BlockContainerElement svg(Frag_I<?>... fragments) {
-    return blockContainer("svg", fragments);
+  public static InlineContainerElement svg(Frag_I<?>... fragments) {
+    return inlineContainer("svg", fragments);
   }
 
-  public static BlockContainerElement svg(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("svg", fragments);
+  public static InlineContainerElement svg(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("svg", fragments);
   }
 
-  public static BlockContainerElement svg(String... textContent) {
-    return blockContainer("svg", textContent);
+  public static InlineContainerElement svg(String... textContent) {
+    return inlineContainer("svg", textContent);
   }
 
-  public static BlockContainerElement svg() {
-    return blockContainer("svg");
+  public static InlineContainerElement svg() {
+    return inlineContainer("svg");
   }
 
   public static BlockContainerElement table(Frag_I<?>... fragments) {
@@ -2096,36 +1597,36 @@ public final class E {
     return blockContainer("td");
   }
 
-  public static BlockContainerElement template(Frag_I<?>... fragments) {
-    return blockContainer("template", fragments);
+  public static InlineContainerElement template(Frag_I<?>... fragments) {
+    return inlineContainer("template", fragments);
   }
 
-  public static BlockContainerElement template(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("template", fragments);
+  public static InlineContainerElement template(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("template", fragments);
   }
 
-  public static BlockContainerElement template(String... textContent) {
-    return blockContainer("template", textContent);
+  public static InlineContainerElement template(String... textContent) {
+    return inlineContainer("template", textContent);
   }
 
-  public static BlockContainerElement template() {
-    return blockContainer("template");
+  public static InlineContainerElement template() {
+    return inlineContainer("template");
   }
 
-  public static BlockContainerElement textarea(Frag_I<?>... fragments) {
-    return blockContainer("textarea", fragments);
+  public static InlineContainerElement textarea(Frag_I<?>... fragments) {
+    return inlineContainer("textarea", fragments);
   }
 
-  public static BlockContainerElement textarea(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("textarea", fragments);
+  public static InlineContainerElement textarea(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("textarea", fragments);
   }
 
-  public static BlockContainerElement textarea(String... textContent) {
-    return blockContainer("textarea", textContent);
+  public static InlineContainerElement textarea(String... textContent) {
+    return inlineContainer("textarea", textContent);
   }
 
-  public static BlockContainerElement textarea() {
-    return blockContainer("textarea");
+  public static InlineContainerElement textarea() {
+    return inlineContainer("textarea");
   }
 
   public static BlockContainerElement tfoot(Frag_I<?>... fragments) {
@@ -2224,12 +1725,12 @@ public final class E {
     return blockContainer("tr");
   }
 
-  public static InlineVoidElement track(Attr_I<?>... attributes) {
-    return inlineVoidElement("track", attributes);
+  public static BlockVoidElement track(Attr_I<?>... attributes) {
+    return blockVoidElement("track", attributes);
   }
 
-  public static InlineVoidElement track() {
-    return inlineVoidElement("track");
+  public static BlockVoidElement track() {
+    return blockVoidElement("track");
   }
 
   public static InlineContainerElement u(Frag_I<?>... fragments) {
@@ -2280,20 +1781,20 @@ public final class E {
     return inlineContainer("var");
   }
 
-  public static BlockContainerElement video(Frag_I<?>... fragments) {
-    return blockContainer("video", fragments);
+  public static InlineContainerElement video(Frag_I<?>... fragments) {
+    return inlineContainer("video", fragments);
   }
 
-  public static BlockContainerElement video(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("video", fragments);
+  public static InlineContainerElement video(Iterable<Frag_I<?>> fragments) {
+    return inlineContainer("video", fragments);
   }
 
-  public static BlockContainerElement video(String... textContent) {
-    return blockContainer("video", textContent);
+  public static InlineContainerElement video(String... textContent) {
+    return inlineContainer("video", textContent);
   }
 
-  public static BlockContainerElement video() {
-    return blockContainer("video");
+  public static InlineContainerElement video() {
+    return inlineContainer("video");
   }
 
   public static InlineVoidElement wbr(Attr_I<?>... attributes) {

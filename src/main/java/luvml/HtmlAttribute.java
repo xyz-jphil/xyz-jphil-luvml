@@ -5,38 +5,41 @@ import java.util.Set;
 
 /**
  * Base class for HTML attributes with lightweight architecture.
- * Metadata is fetched on-demand from static maps in A.java for memory efficiency.
+ * Metadata is fetched on-demand from HtmlAttributeData for memory efficiency.
  */
 public class HtmlAttribute implements Attr_I<HtmlAttribute> {
-    
+
     private final String name;
     private final String value;
-    
+
     public HtmlAttribute(String name, String value) {
         this.name = name;
         this.value = value;
     }
-    
+
     @Override
     public String name() {
         return name;
     }
-    
+
     @Override
     public String value() {
         return value;
     }
-    
+
     public Set<AttributeCategory> categories() {
-        return A.getAttributeCategories(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.categories() : Set.of();
     }
-    
+
     public AttributeType type() {
-        return A.getAttributeType(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.type() : null;
     }
-    
+
     public AttributeScope scope() {
-        return A.getAttributeScope(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.scope() : null;
     }
     
     @Override

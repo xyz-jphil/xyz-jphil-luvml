@@ -17,7 +17,8 @@ public class ScopedEnumAttribute extends ScopedHtmlAttribute {
      * Get allowed enum values for this attribute in its specific scope.
      */
     public Set<String> allowedValues() {
-        return A.getEnumValues(name() + ":" + scope());
+        var data = HtmlAttributeData.get(name());
+        return data != null ? data.enumValues() : Set.of();
     }
     
     /**

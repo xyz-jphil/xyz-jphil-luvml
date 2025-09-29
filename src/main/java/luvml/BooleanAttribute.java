@@ -33,15 +33,18 @@ public class BooleanAttribute implements Attr_I<BooleanAttribute> {
     }
     
     public Set<AttributeCategory> categories() {
-        return A.getAttributeCategories(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.categories() : Set.of();
     }
-    
+
     public AttributeType type() {
-        return A.getAttributeType(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.type() : null;
     }
-    
+
     public AttributeScope scope() {
-        return A.getAttributeScope(name);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.scope() : null;
     }
     
     public boolean isPresent() {

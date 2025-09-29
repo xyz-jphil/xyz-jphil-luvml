@@ -31,11 +31,13 @@ public class ScopedHtmlAttribute implements Attr_I<ScopedHtmlAttribute> {
     }
     
     public Set<AttributeCategory> categories() {
-        return A.getAttributeCategories(name + ":" + scope);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.categories() : Set.of();
     }
-    
+
     public AttributeType type() {
-        return A.getAttributeType(name + ":" + scope);
+        var data = HtmlAttributeData.get(name);
+        return data != null ? data.type() : null;
     }
     
     public AttributeScope scope() {
