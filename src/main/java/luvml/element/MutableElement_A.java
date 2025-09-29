@@ -5,7 +5,7 @@ import luvx.*;
 import java.util.*;
 import luvml.*;
 
-abstract class MutableElement_A<I extends MutableElement_A<I>> implements MutableElement_I<I> {
+abstract class MutableElement_A<I extends MutableElement_A<I>> implements MutableElement_I<I>{
     
     final String tagName;
     final Map<String, String> attributes = new LinkedHashMap<>();
@@ -50,19 +50,23 @@ abstract class MutableElement_A<I extends MutableElement_A<I>> implements Mutabl
      * @return value as per tagName or empty if this tag is not a standard known html5 tag
      */
     public Set<ContentCategory> contentCategories() {
-        return E.getContentCategories(tagName);
+        var data = HtmlElementData.get(tagName);
+        return data != null ? data.contentCategories() : Set.of();
     }
-    
+
     public DisplayType displayType() {
-        return E.getDisplayType(tagName);
+        var data = HtmlElementData.get(tagName);
+        return data != null ? data.displayType() : null;
     }
-    
+
     public ElementType elementTypeEnum() {
-        return E.getElementType(tagName);
+        var data = HtmlElementData.get(tagName);
+        return data != null ? data.elementType() : null;
     }
-    
+
     public Set<Context> contexts() {
-        return E.getValidContexts(tagName);
+        var data = HtmlElementData.get(tagName);
+        return data != null ? data.contexts() : Set.of();
     }
 
     @Override
