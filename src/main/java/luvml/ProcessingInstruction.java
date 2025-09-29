@@ -3,6 +3,7 @@ package luvml;
 import luvx.*;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -26,7 +27,7 @@ public final class ProcessingInstruction implements ProcessingInstruction_I<Proc
      * Example: 'version="1.0" encoding="UTF-8"' -> {version=1.0, encoding=UTF-8}
      */
     private static Map<String, String> parseAttributes(String data) {
-        var attributes = new HashMap<String, String>();
+        var attributes = new LinkedHashMap<String, String>();
         if (data == null || data.trim().isEmpty()) {
             return attributes;
         }

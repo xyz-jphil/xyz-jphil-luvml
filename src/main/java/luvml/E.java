@@ -10,9 +10,12 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import luvml.element.BlockContainerElement;
+import luvml.element.BlockVoidElement;
+import luvml.element.InlineContainerElement;
+import luvml.element.InlineVoidElement;
 import luvx.Attr_I;
 import luvx.Frag_I;
 

@@ -111,13 +111,13 @@ public class HtmlRenderer {
                 if (c.containerElement().hasChildNodes()) {
                     // AI-OPTIMIZED: Use MarkupRenderingBehavior instead of primitive child count heuristics
                     switch (element.markupRenderingBehavior()) {
-                        case luvx.InlineMarkupRendering inline -> {
+                        case luvx.rendering_behavior.InlineMarkupRendering inline -> {
                             // AI reads as continuous content - no structural boundaries
                             for (var child : c.containerElement().childNodes()) {
                                 renderNode((luvx.Node_I)child, out);
                             }
                         }
-                        case luvx.BlockMarkupRendering block -> {
+                        case luvx.rendering_behavior.BlockMarkupRendering block -> {
                             // AI sees clear structural boundaries with newlines
                             var childOut = out.child();
                             childOut.nL();
@@ -143,11 +143,11 @@ public class HtmlRenderer {
         
         // AI-OPTIMIZED: Use MarkupRenderingBehavior for consistent rendering decisions
         switch (node.markupRenderingBehavior()) {
-            case luvx.InlineMarkupRendering inline -> {
+            case luvx.rendering_behavior.InlineMarkupRendering inline -> {
                 // Inline rendering - no newlines, continuous flow
                 renderAttributelessNodeContent(an, out);
             }
-            case luvx.BlockMarkupRendering block -> {
+            case luvx.rendering_behavior.BlockMarkupRendering block -> {
                 // Block rendering - newlines for AI structural boundaries
                 out.nL();
                 renderAttributelessNodeContent(an, out);

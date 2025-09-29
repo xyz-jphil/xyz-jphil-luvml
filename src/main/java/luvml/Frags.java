@@ -80,9 +80,7 @@ public final class Frags<T extends Frag_I<?>> implements Frags_I<Frags<T>> {
     public final Frags<T> ____(String ... frags){return add(frags);}
     public final Frags<T> ____(Iterable<T> frags){return add(frags);}
     public final Frags<T> ____(T ... frags){return add(frags);}
-    
-    
-    
+
     // Static factory methods
     
     /**

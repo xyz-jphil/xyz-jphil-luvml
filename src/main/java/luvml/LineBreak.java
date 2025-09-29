@@ -1,6 +1,6 @@
 package luvml;
 
-import luvx.InlineMarkupRendering;
+import luvx.rendering_behavior.InlineMarkupRendering;
 import luvx.Text_I;
 import luvx.composable.HasTextContent;
 

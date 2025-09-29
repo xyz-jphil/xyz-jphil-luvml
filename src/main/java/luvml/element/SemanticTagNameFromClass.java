@@ -1,6 +1,6 @@
-package luvml.semantic;
+package luvml.element;
 
-public class TagNameFromClass {
+public class SemanticTagNameFromClass {
     // allows tag elements name to get refactored automatically when class is refactored
     public static String tagNameFromClass(Class clzz){
         String n = clzz.getSimpleName();

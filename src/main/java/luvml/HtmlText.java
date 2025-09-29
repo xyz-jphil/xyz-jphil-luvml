@@ -1,5 +1,6 @@
 package luvml;
 
+import luvx.rendering_behavior.InlineMarkupRendering;
 import luvx.*;
 
 /**

@@ -1,7 +1,7 @@
 package luvml.o;
 
-import luvx.BlockMarkupRendering;
-import luvx.InlineMarkupRendering;
+import luvx.rendering_behavior.BlockMarkupRendering;
+import luvx.rendering_behavior.InlineMarkupRendering;
 import luvx.Node_I;
 
 public final class MarkupRenderingState {

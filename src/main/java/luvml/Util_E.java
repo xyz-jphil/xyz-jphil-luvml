@@ -2,6 +2,9 @@ package luvml;
 
 import static luvml.E.*;
 import static luvml.Util_A.charset_utf8;
+import luvml.element.BlockContainerElement;
+import luvml.element.BlockVoidElement;
+import luvml.element.InlineVoidElement;
 import luvx.Attr_I;
 import luvx.Frag_I;
 
