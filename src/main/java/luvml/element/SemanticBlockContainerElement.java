@@ -1,16 +1,15 @@
 package luvml.element;
 
-import static luvml.element.SemanticTagNameFromClass.*;
 import luvx.rendering_behavior.Block;
 import luvml.*;
 import java.util.Set;
 
-public non-sealed class SemanticBlockContainerElement<I extends SemanticBlockContainerElement<I>>
+public abstract non-sealed class SemanticBlockContainerElement<I extends SemanticBlockContainerElement<I>>
         extends MutableContainerElement_A<I>
         implements SemanticContainerElement_I<I>, Block {
 
     public SemanticBlockContainerElement(Class<I> clzz) {
-        super(tagNameFromClass(clzz));
+        super(clzz);
     }
 
     /**

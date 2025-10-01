@@ -24,6 +24,11 @@ public sealed abstract class MutableContainerElement_A<I extends MutableContaine
     protected MutableContainerElement_A(String tagName) {
         super(tagName);
     }
+
+    MutableContainerElement_A(Class<? extends SemanticElement_I> clss) {
+        super(clss);
+    }
+    
     
     @Override
     public final List<? extends Node_I<?>> childNodes() {

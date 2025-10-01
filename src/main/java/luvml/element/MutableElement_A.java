@@ -14,6 +14,10 @@ abstract class MutableElement_A<I extends MutableElement_A<I>> implements Mutabl
         this.tagName = tagName;
     }
     
+    MutableElement_A(Class<? extends SemanticElement_I> clss) {
+        this.tagName = SemanticElementTagNameClassNameMapping.objTagName(clss, clss);
+    }
+    
     @Override
     public final String tagName() {
         return tagName;
@@ -44,6 +48,13 @@ abstract class MutableElement_A<I extends MutableElement_A<I>> implements Mutabl
         }
         return self();
     }
+
+    @Override
+    public I addAttribute(String name, String value) {
+        return addAttributes(new HtmlAttribute(name, value));
+    }
+    
+    
     
     /**
      * Sub-classes can override this and return values specific to their behavior, this applies to #displayType #elementTypeEnum #contexts

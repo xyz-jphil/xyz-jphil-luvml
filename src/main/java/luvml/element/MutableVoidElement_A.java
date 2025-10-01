@@ -14,4 +14,8 @@ sealed abstract class MutableVoidElement_A<I extends MutableVoidElement_A<I>>
     protected MutableVoidElement_A(String tagName) {
         super(tagName);
     }
+    
+    MutableVoidElement_A(Class<? extends SemanticElement_I> clss) {
+        super(clss);
+    }
 }
