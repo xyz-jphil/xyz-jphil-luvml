@@ -68,4 +68,35 @@ public sealed abstract class MutableContainerElement_A<I extends MutableContaine
         return self();
     }
     
+    public <X extends SemanticElement_I> Optional<X> findChild(Class<X> clzz){
+        for (var c : children) {
+            if( clzz.isInstance(c) ){
+                return Optional.of((X)c);
+            }
+        }
+        return  Optional.empty();
+    }
+    
+    
+    public <X extends SemanticElement_I> List<X> findChildren(Class<X> clzz){
+        final var r = new LinkedList<X>();
+        for (var c : children) {
+            if(clzz.isInstance(c)){
+                r.add((X)c);
+            }
+        }
+        return r;
+    }
+    
+    public <X extends SemanticElement_I> List<Element_I> find(Class<X> clzz){
+        final var r = new LinkedList<Element_I>();
+        var tgNm = luvml.element.SemanticElementTagNameClassNameMapping.classTagName(clzz);
+        for (var c : children) {
+            if(c instanceof Element_I e && tgNm.equals(e.tagName()) ){
+                r.add(e);
+            }
+        }
+        return r;
+    }
+    
 }

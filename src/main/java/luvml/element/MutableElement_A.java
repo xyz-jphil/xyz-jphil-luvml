@@ -54,8 +54,6 @@ abstract class MutableElement_A<I extends MutableElement_A<I>> implements Mutabl
         return addAttributes(new HtmlAttribute(name, value));
     }
     
-    
-    
     /**
      * Sub-classes can override this and return values specific to their behavior, this applies to #displayType #elementTypeEnum #contexts
      * @return value as per tagName or empty if this tag is not a standard known html5 tag

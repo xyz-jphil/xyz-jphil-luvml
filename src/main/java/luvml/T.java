@@ -1,9 +1,5 @@
 package luvml;
 
-import luvx.CData_I;
-import luvx.Comment_I;
-import luvx.Text_I;
-
 /**
  * Static factory methods for creating text-based nodes like
  * Text, Comments, and CDATA sections.
@@ -84,4 +80,5 @@ public final class T {
     public static LineBreak newline(){
         return LineBreak.NL;
     }
+
 }
