@@ -25,6 +25,11 @@ public class LineBreak
 
     @Override
     public String textContent() {
+        return text();
+    }
+
+    @Override
+    public String text() {
         return nLStr;
     }
 

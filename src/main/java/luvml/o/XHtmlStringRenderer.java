@@ -82,7 +82,21 @@ public class XHtmlStringRenderer {
                         if (formatted) sb.append('\n'); // this is a unique case
                     }
                 }
-                
+
+            }
+            case RawTextElement_T rt -> {
+                // RAW_TEXT: style, script - content is NOT escaped
+                renderAttributes(element, sb);
+                sb.append('>');
+                sb.append(rt.rawTextElement().rawTextContent()); // NO escaping
+                sb.append("</").append(tagName).append('>');
+            }
+            case EscapableRawTextElement_T ert -> {
+                // ESCAPABLE_RAW_TEXT: title, textarea - content IS escaped
+                renderAttributes(element, sb);
+                sb.append('>');
+                sb.append(escapeText(ert.escapableRawTextElement().escapableTextContent())); // WITH escaping
+                sb.append("</").append(tagName).append('>');
             }
             case ContainerElement_T ce -> {
                 renderAttributes(element, sb);

@@ -5,9 +5,9 @@
 import luvml.o.*;
 import static luvml.E.*;
 import static luvml.A.*;
-import static luvml.T.*;
+import static luvml.T.inlineCData;
+import static luvml.T.comment;
 import static luvml.Util_E.*;
-import static luvml.Util_A.*;
 
 public class TestHtmlRenderer {
     
@@ -61,7 +61,7 @@ public class TestHtmlRenderer {
     static void testTextEscaping() {
         System.out.println("4. Text escaping test:");
         var content = div(
-            text("Text with <tags> & \"quotes\""),
+            t("Text with <tags> & \"quotes\""),
             comment("This is a comment"),
             inlineCData("Raw <content> here")
         );

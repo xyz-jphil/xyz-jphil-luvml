@@ -21,11 +21,16 @@ public final class HtmlText implements Text_I<HtmlText> {
     
     @Override
     public String textContent() {
-        return textContent;
+        return text();
     }
     
     @Override
     public final InlineMarkupRendering markupRenderingBehavior() {
         return InlineMarkupRendering.I;
+    }
+
+    @Override
+    public String text() {
+        return textContent;
     }
 }

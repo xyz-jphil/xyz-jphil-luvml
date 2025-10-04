@@ -17,7 +17,14 @@ abstract class Text_A<T extends Text_A<T>> implements Text_I<T>, HasTextContent<
     }
 
     @Override
-    public String textContent() {
+    public String text() {
         return content;
     }
+
+    @Override
+    public String textContent() {
+        return content;  // Keep for backward compatibility
+    }
+
+    // escapableTextContent() inherited from Text_I with default implementation
 }

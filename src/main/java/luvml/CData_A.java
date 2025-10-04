@@ -18,6 +18,12 @@ abstract class CData_A<T extends CData_A<T>> implements CData_I<T>, HasTextConte
 
     @Override
     public String textContent() {
+        return cdata();
+    }
+    
+    @Override
+    public String cdata() {
         return content;
     }
+    
 }

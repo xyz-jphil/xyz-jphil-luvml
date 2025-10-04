@@ -22,6 +22,13 @@ public final class T {
     }
     
     /**
+     * alias and override over text
+     */
+    public static InlineText t(String content) {
+        return text(content);
+    }
+    
+    /**
      * Creates a block Text node. Its content will be escaped by a renderer.
      * Creates structural boundaries with newlines for AI comprehension.
      * @param content The raw, unescaped text.

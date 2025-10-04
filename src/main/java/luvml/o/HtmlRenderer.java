@@ -106,6 +106,18 @@ public class HtmlRenderer {
                     }
                 }
             }
+            case RawTextElement_T rt -> {
+                // RAW_TEXT: style, script - content is NOT escaped
+                out.__(">");
+                out.__(rt.rawTextElement().rawTextContent()); // NO escaping - raw CSS/JS
+                out.__("</").__(element.tagName()).__(">");
+            }
+            case EscapableRawTextElement_T ert -> {
+                // ESCAPABLE_RAW_TEXT: title, textarea - content IS escaped
+                out.__(">");
+                out.__(escapeTextContent(ert.escapableRawTextElement().escapableTextContent())); // WITH escaping
+                out.__("</").__(element.tagName()).__(">");
+            }
             case ContainerElement_T c -> {
                 out.__(">");
                 if (c.containerElement().hasChildNodes()) {

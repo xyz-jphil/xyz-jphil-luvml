@@ -15,7 +15,7 @@ abstract class MutableElement_A<I extends MutableElement_A<I>> implements Mutabl
     }
     
     MutableElement_A(Class<? extends SemanticElement_I> clss) {
-        this.tagName = SemanticElementTagNameClassNameMapping.objTagName(clss, clss);
+        this.tagName = SemanticElementTagNameClassNameMapping.objTagName(this, clss);
     }
     
     @Override

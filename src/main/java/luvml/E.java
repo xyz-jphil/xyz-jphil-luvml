@@ -5,13 +5,17 @@ import static luvml.Context.*;
 import static luvml.DisplayType.*;
 import static luvml.ElementType.*;
 
+import java.lang.CharSequence;
 import java.lang.Iterable;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import luvml.element.BlockContainerElement;
+import luvml.element.BlockEscapableRawTextElement;
+import luvml.element.BlockRawTextElement;
 import luvml.element.BlockVoidElement;
 import luvml.element.InlineContainerElement;
+import luvml.element.InlineEscapableRawTextElement;
 import luvml.element.InlineVoidElement;
 import luvx.Attr_I;
 import luvx.Frag_I;
@@ -83,6 +87,14 @@ public final class E {
 
   public static InlineVoidElement inlineVoidElement(String tagName) {
     return new InlineVoidElement(tagName);
+  }
+
+  public static InlineText text(String content) {
+    return T.text(content);
+  }
+
+  public static InlineText t(String content) {
+    return T.t(content);
   }
 
   public static InlineContainerElement a(Frag_I<?>... fragments) {
@@ -1333,20 +1345,16 @@ public final class E {
     return inlineContainer("samp");
   }
 
-  public static InlineContainerElement script(Frag_I<?>... fragments) {
-    return inlineContainer("script", fragments);
+  public static BlockRawTextElement script(Attr_I<?>... attrs) {
+    return new BlockRawTextElement("script").addAttributes(attrs);
   }
 
-  public static InlineContainerElement script(Iterable<Frag_I<?>> fragments) {
-    return inlineContainer("script", fragments);
+  public static BlockRawTextElement script(CharSequence... textContent) {
+    return new BlockRawTextElement("script").addContent(textContent);
   }
 
-  public static InlineContainerElement script(String... textContent) {
-    return inlineContainer("script", textContent);
-  }
-
-  public static InlineContainerElement script() {
-    return inlineContainer("script");
+  public static BlockRawTextElement script() {
+    return new BlockRawTextElement("script");
   }
 
   public static BlockContainerElement search(Frag_I<?>... fragments) {
@@ -1469,20 +1477,16 @@ public final class E {
     return inlineContainer("strong");
   }
 
-  public static BlockContainerElement style(Frag_I<?>... fragments) {
-    return blockContainer("style", fragments);
+  public static BlockRawTextElement style(Attr_I<?>... attrs) {
+    return new BlockRawTextElement("style").addAttributes(attrs);
   }
 
-  public static BlockContainerElement style(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("style", fragments);
+  public static BlockRawTextElement style(CharSequence... textContent) {
+    return new BlockRawTextElement("style").addContent(textContent);
   }
 
-  public static BlockContainerElement style(String... textContent) {
-    return blockContainer("style", textContent);
-  }
-
-  public static BlockContainerElement style() {
-    return blockContainer("style");
+  public static BlockRawTextElement style() {
+    return new BlockRawTextElement("style");
   }
 
   public static InlineContainerElement sub(Frag_I<?>... fragments) {
@@ -1613,20 +1617,16 @@ public final class E {
     return inlineContainer("template");
   }
 
-  public static InlineContainerElement textarea(Frag_I<?>... fragments) {
-    return inlineContainer("textarea", fragments);
+  public static InlineEscapableRawTextElement textarea(Attr_I<?>... attrs) {
+    return new InlineEscapableRawTextElement("textarea").addAttributes(attrs);
   }
 
-  public static InlineContainerElement textarea(Iterable<Frag_I<?>> fragments) {
-    return inlineContainer("textarea", fragments);
+  public static InlineEscapableRawTextElement textarea(CharSequence... textContent) {
+    return new InlineEscapableRawTextElement("textarea").addContent(textContent);
   }
 
-  public static InlineContainerElement textarea(String... textContent) {
-    return inlineContainer("textarea", textContent);
-  }
-
-  public static InlineContainerElement textarea() {
-    return inlineContainer("textarea");
+  public static InlineEscapableRawTextElement textarea() {
+    return new InlineEscapableRawTextElement("textarea");
   }
 
   public static BlockContainerElement tfoot(Frag_I<?>... fragments) {
@@ -1693,20 +1693,16 @@ public final class E {
     return inlineContainer("time");
   }
 
-  public static BlockContainerElement title(Frag_I<?>... fragments) {
-    return blockContainer("title", fragments);
+  public static BlockEscapableRawTextElement title(Attr_I<?>... attrs) {
+    return new BlockEscapableRawTextElement("title").addAttributes(attrs);
   }
 
-  public static BlockContainerElement title(Iterable<Frag_I<?>> fragments) {
-    return blockContainer("title", fragments);
+  public static BlockEscapableRawTextElement title(CharSequence... textContent) {
+    return new BlockEscapableRawTextElement("title").addContent(textContent);
   }
 
-  public static BlockContainerElement title(String... textContent) {
-    return blockContainer("title", textContent);
-  }
-
-  public static BlockContainerElement title() {
-    return blockContainer("title");
+  public static BlockEscapableRawTextElement title() {
+    return new BlockEscapableRawTextElement("title");
   }
 
   public static BlockContainerElement tr(Frag_I<?>... fragments) {
