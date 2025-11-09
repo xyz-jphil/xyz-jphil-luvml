@@ -7,30 +7,32 @@ import luvx.*;
  * Simple text node implementation.
  */
 public final class HtmlText implements Text_I<HtmlText> {
-    
-    private final String textContent;
-    
+
+    private final String wholeTextContent;
+
     public HtmlText(String textContent) {
-        this.textContent = textContent;
+        this.wholeTextContent = textContent;
     }
-    
+
     @Override
     public HtmlText self() {
         return this;
     }
-    
+
     @Override
     public String textContent() {
         return text();
     }
-    
+
     @Override
     public final InlineMarkupRendering markupRenderingBehavior() {
         return InlineMarkupRendering.I;
     }
 
     @Override
-    public String text() {
-        return textContent;
+    public String wholeText() {
+        return wholeTextContent;
     }
+
+    // text() inherited from Text_I with default implementation: normalizeWhitespace(wholeText())
 }
